@@ -1,0 +1,29 @@
+# Netlify Configuration for Legal Document Assistant
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+# Next.js specific settings
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Environment variables (set these in Netlify Dashboard)
+# NEXT_PUBLIC_SUPABASE_URL
+# NEXT_PUBLIC_SUPABASE_ANON_KEY
+# SUPABASE_SERVICE_ROLE_KEY
+# NEXT_PUBLIC_GEMINI_API_KEY (optional - already hardcoded for demo)
+
+# Redirect rules for Next.js
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+
+# Headers for security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
