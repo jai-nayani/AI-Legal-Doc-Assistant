@@ -13,7 +13,7 @@ export interface PlaceholderMetadata {
 
 const getGeminiApiKey = (): string => {
   // 🔥 TESTING ONLY - Replace with your actual API key
-  const apiKey = 'AIzaSyCdTcSTGsidXFdgziCL_0YWN3IQKl_bdxo'
+  const apiKey = 'AIzaSyBUbd-sZvv9tbvedVRwywylgmp-IcWGrr4'
   
   // const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY
   // if (!apiKey || apiKey === 'your_api_key_here') {
