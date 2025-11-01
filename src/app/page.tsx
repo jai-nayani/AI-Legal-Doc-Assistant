@@ -207,72 +207,74 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="flex items-center justify-center px-4 py-12">
-        <div className="max-w-md w-full">
-          <div className="text-center mb-8">
-            <div className="mx-auto w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4">
-              <FileText className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+        <div className="max-w-2xl w-full">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+            <div className="text-center mb-6">
+              <div className="mx-auto w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4">
+                <FileText className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+              </div>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">Legal Document Assistant</h1>
+              <p className="text-gray-600 dark:text-gray-400">Upload a legal document template to get started</p>
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">Legal Document Assistant</h1>
-            <p className="text-gray-600 dark:text-gray-400">Upload a legal document template to get started</p>
-          </div>
 
-        <div
-          className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
-            isDragOver
-              ? 'border-blue-400 bg-blue-50 dark:bg-blue-900/20'
-              : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
-          }`}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-        >
-          <Upload className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-          <p className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">Upload your document</p>
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
-            Drag and drop a .docx file here, or click to browse
-          </p>
+            <div
+              className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
+                isDragOver
+                  ? 'border-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                  : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
+              }`}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+            >
+              <Upload className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+              <p className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">Upload your document</p>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                Drag and drop a .docx file here, or click to browse
+              </p>
 
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".docx"
-            onChange={handleFileInputChange}
-            className="hidden"
-            id="file-upload"
-          />
-          <label
-            htmlFor="file-upload"
-            className="inline-flex items-center px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 cursor-pointer transition-colors"
-          >
-            Choose File
-          </label>
-        </div>
-
-        {(document.isProcessing || uploadingToCloud) && (
-          <div className="mt-4 text-center">
-            <div className="inline-flex items-center text-blue-600 dark:text-blue-400">
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 dark:border-blue-400 mr-2"></div>
-              {uploadingToCloud ? 'Saving to cloud...' : 'Processing document...'}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".docx"
+                onChange={handleFileInputChange}
+                className="hidden"
+                id="file-upload"
+              />
+              <label
+                htmlFor="file-upload"
+                className="inline-flex items-center px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 cursor-pointer transition-colors"
+              >
+                Choose File
+              </label>
             </div>
-          </div>
-        )}
 
-        {document.error && (
-          <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-            <div className="flex items-center">
-              <AlertCircle className="w-5 h-5 text-red-500 dark:text-red-400 mr-2" />
-              <p className="text-red-700 dark:text-red-300">{document.error}</p>
+            {(document.isProcessing || uploadingToCloud) && (
+              <div className="mt-4 text-center">
+                <div className="inline-flex items-center text-blue-600 dark:text-blue-400">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 dark:border-blue-400 mr-2"></div>
+                  {uploadingToCloud ? 'Saving to cloud...' : 'Processing document...'}
+                </div>
+              </div>
+            )}
+
+            {document.error && (
+              <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                <div className="flex items-center">
+                  <AlertCircle className="w-5 h-5 text-red-500 dark:text-red-400 mr-2" />
+                  <p className="text-red-700 dark:text-red-300">{document.error}</p>
+                </div>
+              </div>
+            )}
+
+            <div className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+              <p>Supported format: .docx files only</p>
+              <p className="mt-1">
+                {user 
+                  ? '✅ Signed in - Documents will be saved to your account' 
+                  : '📁 Documents processed locally only. Sign in to save to cloud.'}
+              </p>
             </div>
-          </div>
-        )}
-
-          <div className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
-            <p>Supported format: .docx files only</p>
-            <p className="mt-1">
-              {user 
-                ? '✅ Signed in - Documents will be saved to your account' 
-                : '📁 Documents processed locally only. Sign in to save to cloud.'}
-            </p>
           </div>
         </div>
       </div>
