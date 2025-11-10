@@ -24,8 +24,8 @@ const getGeminiApiKey = (): string => {
 export async function detectPlaceholdersWithAI(documentContent: string): Promise<PlaceholderMetadata[]> {
   const apiKey = getGeminiApiKey()
   const genAI = new GoogleGenerativeAI(apiKey)
-  // Using gemini-2.5-flash: Latest model with improved performance
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
+  // Using gemini-1.5-flash: Stable, production-ready model
+  const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
 
   const prompt = `
 You are analyzing a legal document to find ALL EMPTY placeholders that need user input.
