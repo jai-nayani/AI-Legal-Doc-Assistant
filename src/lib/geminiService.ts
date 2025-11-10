@@ -12,21 +12,20 @@ export interface PlaceholderMetadata {
 }
 
 const getGeminiApiKey = (): string => {
-  // 🔥 TESTING ONLY - Replace with your actual API key
-  const apiKey = 'AIzaSyDWD_hYiGRc1Y7gGRd1rCKLARIuuaCiYXg'
+  // ✅ Updated API key for demo
+  const apiKey = 'AIzaSyCur9eeg-VdI9wuMoTm6i2ndw_iPOj3uN8'
   
-  // const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY
-  // if (!apiKey || apiKey === 'your_api_key_here') {
-  //   throw new Error('Gemini API key not configured. Please set NEXT_PUBLIC_GEMINI_API_KEY in .env.local')
-  // }
+  if (!apiKey) {
+    throw new Error('Gemini API key not configured.')
+  }
   return apiKey
 }
 
 export async function detectPlaceholdersWithAI(documentContent: string): Promise<PlaceholderMetadata[]> {
   const apiKey = getGeminiApiKey()
   const genAI = new GoogleGenerativeAI(apiKey)
-  // Using gemini-2.0-flash-exp: Available on free tier
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' })
+  // Using gemini-2.5-flash: Latest model with improved performance
+  const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
 
   const prompt = `
 You are analyzing a legal document to find ALL EMPTY placeholders that need user input.
